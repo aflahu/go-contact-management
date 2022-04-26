@@ -1,0 +1,6 @@
+vendor/
+.vscode/
+.idea/
+.env
+.DS_Store
+go-contact-management
