@@ -1,0 +1,30 @@
+version: '3'
+ 
+services:
+  db:
+    platform: linux/x86_64
+    image: mysql:5.7
+    container_name: go-contact-management-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: go-contact-management-db
+      MYSQL_USER: go-contact-management-db
+      MYSQL_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - go-contact-management-dbdata:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: go-contact-management-pma
+    links:
+      - go-contact-management-db
+    environment:
+      PMA_HOST: go-contact-management-db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 2000:80
+volumes:
+  go-contact-management-dbdata:
